@@ -4,6 +4,7 @@ import { getCalendar } from './axios.js';
 import MonthSelect from './monthSelect.js';
 import Content from './content.js';
 import InputWindow from './taskInputWindow.js'
+import EditWindow from './taskEditWindow.js'
 
 class App extends Component {
 
@@ -16,10 +17,11 @@ class App extends Component {
     }
 
     render() {
-        const { inputWindow } = store.getState();
+        const { inputWindow, editWindow } = store.getState();
         return (
             <div>
                 { inputWindow ? <InputWindow /> : '' }
+                { editWindow ? <EditWindow />: '' }
                 <MonthSelect />
                 <Content />
             </div>

@@ -1,7 +1,7 @@
 import store from './store.js';
 
 const toggleInput = (e, id, month, weekday, day) => {
-    e.preventDefault()
+    e.preventDefault();
     const { inputWindow } = store.getState();
     store.dispatch({
         type: 'SHOW_INPUT',
@@ -17,5 +17,20 @@ const toggleInput = (e, id, month, weekday, day) => {
     })
 }
 
+const toggleEdit = (e, id, month, weekday, day, taskId) => {
+    e.preventDefault();
+    const { editWindow } = store.getState();
+    store.dispatch({
+        type: 'SHOW_EDIT',
+        data: {
+            toggleEdit: !editWindow,
+            taskToEdit: taskId
+        }
+    })
+    console.log(store.getState())
+}
 
-export default toggleInput;
+export {
+    toggleInput,
+    toggleEdit
+};

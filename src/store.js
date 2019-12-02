@@ -4,6 +4,7 @@ const initialState = {
     currMonth: 4,
     calendarView: [],
     inputWindow: false,
+    editWindow: false,
     inputDate: {
         month: '',
         weekday: '',
@@ -12,6 +13,9 @@ const initialState = {
     },
     inputName: '',
     inputDescription: '',
+    taskToEdit: null,
+    editName: '',
+    editDescription: '',
 }
 
 const reducer = (state = initialState, action) => {
@@ -33,6 +37,16 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 inputDescription: data
             }
+        case 'EDIT_NAME_CHANGE':
+            return {
+                ...state,
+                editName: data
+            }
+        case 'EDIT_DESCRIPTION_CHANGE':
+            return {
+                ...state,
+                editDescription: data
+            }
         case 'SHOW_INPUT':
             return {
                 ...state,
@@ -44,14 +58,39 @@ const reducer = (state = initialState, action) => {
                     id: data.inputDate.id
                 }
             }
+        case 'SHOW_EDIT':
+            return {
+                ...state, 
+                editWindow: data.toggleEdit,
+                taskToEdit: data.taskToEdit
+            }
         case 'POST_TASK':
-            console.log([ ...state.calendarView, data ])
             return {
                 ...state,
                 calendarView: state.calendarView
                     .map(day => day.id === data.calendarDateId
-                        ? { ...day, tasks: [data] }
+                        ? { ...day, tasks: [...day.tasks, data] }
                         : day)
+            }
+        case 'EDIT_TASK':
+            return {
+                ...state,
+                calendarView: [...state.calendarView
+                    .map(day => {
+                        day.tasks.length
+                        ? { ...day, tasks: [ day.tasks.filter(task => task.id === data.id) ] }
+                        : { ...day } 
+                    })
+                    ]
+             }
+
+        case 'DELETE_TASK': 
+            return {
+                ...state,
+                calendarView: state.calendarView
+                    .map(day => day.tasks.length
+                        ? { ...day, tasks: [ day.tasks.filter(task => task.id !== data) ] }
+                        : { ...day } )
             }
         default:
             return state;

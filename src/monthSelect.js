@@ -13,8 +13,8 @@ class MonthSelect extends Component {
     render() {
         const { currMonth, calendarView } = store.getState();
         return (
-            <div>
-                <button onClick={() => getCalendar(currMonth - 1) }>Prev</button>
+            <div className='month-select'>
+                <button className='btn nav-btn' onClick={() => getCalendar(currMonth - 1) }>Prev</button>
                 <h1>
                     {
                         calendarView.length
@@ -22,7 +22,7 @@ class MonthSelect extends Component {
                             : 'Loading Month...'
                     }
                 </h1>
-                <button onClick={() => getCalendar(currMonth + 1) }>Next</button>
+                <button className='btn nav-btn' onClick={() => getCalendar(currMonth + 1) }>Next</button>
             </div>
         )
     }

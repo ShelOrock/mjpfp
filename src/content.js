@@ -14,7 +14,7 @@ class Content extends Component {
         return (
             calendarView.length
             ? 
-                <ul>
+                <ul className='day-list'>
                     {
                         calendarView.map(day => {
                             return (

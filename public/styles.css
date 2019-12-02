@@ -1,6 +1,120 @@
-form {
-    position: absolute;
-    height: 100vh;
+body {
+	font-family: Courier;
+}
+
+.month-select {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.nav-btn {
+	background-color: #F6CFCA;
+	box-shadow: 1px 1px #888;
+	height: 2rem;
+	width: 4rem;
+	border-radius: 5px;
+}
+
+.form-container {
+	position: fixed;
+    height: 100%;
     width: 100vw;
     background-color: white;
+}
+
+.form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.form > h2 {
+	padding: 3rem;
+}
+
+.input-container {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+}
+
+.input-field {
+	display: flex;
+	justify-content: space-between;
+}
+
+input {
+	width: 20rem;
+	height: 2rem;
+}
+
+.button-container {
+	width: 50%;
+	display: flex;
+	justify-content: space-around;
+	padding: 2rem;
+}
+
+.day-list {
+	list-style-type: none;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.day {
+	margin: 2rem;
+	padding: 1rem;
+	width: calc(100% / 3 - 6.5rem);
+	border: 1px solid black;
+	border-radius: 10px;
+	box-shadow: 3px 3px #888;
+}
+
+.btn {
+	border: none;
+	padding: .5rem 0;
+	cursor: pointer;
+}
+
+.btn:focus {
+	outline: 0;
+	box-shadow: none;
+}
+
+.add-task {
+	width: 100%;
+	background-color: #FFE8E5;
+	border-radius: 5px;
+	box-shadow: 1px 1px #888;
+	margin: .5rem 0;
+}
+
+.task-list {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.list-item {
+	background-color: #F6CFCA;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 1px 1px #888;
+	padding: 1rem;
+}
+
+.list-item-btn {
+	background-color: #EABFB9;
+	box-shadow: 1px 1px #888;
+	padding: 1rem;
+	margin: .5rem;
+	border-radius: 10px;
+}
+
+.task-btn {
+	margin: 0 2rem;
 }

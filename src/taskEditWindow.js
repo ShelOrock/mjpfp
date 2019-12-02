@@ -1,9 +1,9 @@
 import store from './store';
 import React, { Component } from 'react';
-import { toggleInput } from './util';
-import { createTask } from './axios.js'
+import { toggleEdit } from './util';
+import { createTask, editTask} from './axios.js'
 
-class InputWindow extends Component {
+class EditWindow extends Component {
 
     componentDidMount() {
         store.subscribe(() => {
@@ -12,21 +12,20 @@ class InputWindow extends Component {
     }
 
     render() {
-        const { inputDate, inputName, inputDescription } = store.getState();
-        const { month, weekday, day } = inputDate;
+        const { taskToEdit, editName, editDescription } = store.getState();
         return (
             <div className='form-container'>
                 <form className='form'>
-                    <h2>Create a new task for { weekday }, { month } { day }</h2>
+                    <h2>Edit task</h2>
                     <div className='input-container'>
                         <div className='input-field'>
                             <p>Name</p>
                             <input
                                 type='text'
-                                value={ inputName }
+                                value={ editName }
                                 onChange={(e)=>
                                     store.dispatch({
-                                        type: 'INPUT_NAME_CHANGE',
+                                        type: 'EDIT_NAME_CHANGE',
                                         data: e.target.value,
                                     })
                                 }
@@ -36,10 +35,10 @@ class InputWindow extends Component {
                             <p>Description</p>
                             <input
                                 type='text'
-                                value={ inputDescription }
+                                value={ editDescription }
                                 onChange={(e)=>
                                     store.dispatch({
-                                        type: 'INPUT_DESCRIPTION_CHANGE',
+                                        type: 'EDIT_DESCRIPTION_CHANGE',
                                         data: e.target.value,
                                     })
                                 }
@@ -48,11 +47,11 @@ class InputWindow extends Component {
                     </div>
                     <div className='button-container'>
                         <button className='btn add-task task-btn' onClick={(e)=> {
-                            createTask(e)
-                            toggleInput(e)
+                            editTask(e, taskToEdit)
+                            toggleEdit(e)
                         }
-                         }>Create Task</button>
-                        <button className='btn add-task task-btn' onClick={(e)=> toggleInput(e) }>Cancel</button>
+                         }>Edit Task</button>
+                        <button className='btn add-task task-btn' onClick={(e)=> toggleInput(e, taskToEdit) }>Cancel</button>
                     </div>
                 </form>
             </div>
@@ -61,4 +60,4 @@ class InputWindow extends Component {
 }
 
 
-export default InputWindow
+export default EditWindow

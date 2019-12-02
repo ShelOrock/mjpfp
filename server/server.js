@@ -54,6 +54,37 @@ app.post('/api/tasks', (req, res, next) => {
         .catch(e => console.log('ERROR CREATING', e))
 })
 
+app.put('/api/tasks/:id', (req, res, next) => {
+    const { id } = req.params
+    const { editName, editDescription } = req.body;
+        Task.update(
+            {
+                name: editName,
+                description: editDescription
+            },
+            { where: { id: id } }
+        )   
+        .then(() => {
+            Task.findOne({
+                where: { id: id } 
+            })
+            .then(data => {
+                res.send(data)
+            })
+        })
+        .catch(e => console.log('ERROR CREATING', e))
+})
+
+app.delete('/api/tasks/:id', (req, res, next) => {
+    const { id } = req.params
+    Task.destroy({
+        where: { id: id }
+    })
+    .then(() => res.send(`Task ${id} deleted`))
+    .catch(e => console.log('ERROR DELETE', e))
+
+})
+
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
 })
