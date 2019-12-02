@@ -1,4 +1,2 @@
-.idea
 node_modules
-.DS_Store
-.npmrc
+static/main.js
